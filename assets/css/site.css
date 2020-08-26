@@ -9,6 +9,20 @@
 
 /* Write your styles below this line. */
 
+section {
+  @apply my-8;
+}
+
+@screen lg {
+  section {
+    @apply my-10;
+  }
+}
+
+h3 {
+  @apply uppercase font-semibold text-sm tracking-widest mb-2;
+}
+
 /* Write your styles above this line. */
 
 @tailwind utilities;
