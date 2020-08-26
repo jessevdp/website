@@ -1,0 +1,75 @@
+---
+layout: default
+permalink: /
+---
+
+<div class="p-4 md:pt-6 lg:pt-12 container max-w-lg md:max-w-4xl md:mx-auto">
+
+  <header class="md:flex md:flex-row items-end md:mb-2">
+
+    <div class="flex flex-row items-end md:w-5/12 md:order-last md:justify-end md:ml-4">
+
+      <img src="{{site.baseurl}}/assets/images/profile-picture.jpeg" alt="Profile picture of Jesse"
+        class="w-24 md:order-last lg:w-32" />
+
+      <div class="mx-4 md:text-right">
+        <h2 class="font-bold">Jesse van der Pluijm</h2>
+        <p>Software Engineer</p>
+      </div>
+
+    </div>
+
+    <h1 class="font-bold text-3xl leading-snug mt-8 md:mt-0 md:w-7/12 lg:text-4xl">Hello, my name is Jesse and I am a
+      software engineer with a passion for design.</h1>
+
+  </header>
+
+  <main class="md:mx-auto md:flex md:flex-row">
+
+    <div class="md:w-5/12 md:mr-8 lg:mr-16">
+
+      {% include_relative sections/quote.html
+        class="md:hidden"
+        content="Insanely organized and logical to the nth degree, Jesse guides through elegance, to beautiful code."
+        author="Theo Rosendorf, founder of Glyphic"
+      %}
+
+      {% include_relative sections/contact.html %}
+
+      {% include_relative sections/competences.html class="md:hidden" %}
+
+      {% include_relative sections/experience.html class="md:hidden" %}
+
+      {% include_relative sections/languages.html %}
+
+      {% include_relative sections/quote.html
+        class="md:hidden"
+        content="Jesse is a passionate engineer who excels in acquiring new knowledge. His work is very well organized and he has a keen eye for detail, both from a technological perspective as in regard to customer requests."
+        author="Rob Habraken, CTO at We are you Agency"
+      %}
+
+      {% include_relative sections/hobbies.html %}
+
+    </div>
+
+    <div class="hidden md:block md:w-7/12">
+
+      {% include_relative sections/quote.html
+        content="Insanely organized and logical to the nth degree, Jesse guides through elegance, to beautiful code."
+        author="Theo Rosendorf, founder of Glyphic"
+      %}
+
+      {% include_relative sections/competences.html %}
+
+      {% include_relative sections/experience.html %}
+
+      {% include_relative sections/quote.html
+        content="Jesse is a passionate engineer who excels in acquiring new knowledge. His work is very well organized and he has a keen eye for detail, both from a technological perspective as in regard to customer requests."
+        author="Rob Habraken, CTO at We are you Agency"
+      %}
+
+    </div>
+
+  </main>
+
+</div>
