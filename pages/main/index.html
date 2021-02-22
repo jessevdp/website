@@ -26,6 +26,7 @@ permalink: /
 
   <main class="md:mx-auto md:flex md:flex-row">
 
+    <!-- only content area on sm- display, small content area on md+ -->
     <div class="md:w-5/12 md:mr-8 lg:mr-16">
 
       {% include_relative sections/quote.html
@@ -36,22 +37,23 @@ permalink: /
 
       {% include_relative sections/contact.html %}
 
-      {% include_relative sections/competences.html class="md:hidden" %}
+      {% include_relative sections/competences.html %}
+
+      {% include_relative sections/quote.html
+        content="Jesse is a passionate engineer who excels in acquiring new knowledge. His work is very well organized and he has a keen eye for detail, both from a technological perspective as in regard to customer requests."
+        author="Rob Habraken, CTO at We are you Agency"
+      %}
 
       {% include_relative sections/experience.html class="md:hidden" %}
 
       {% include_relative sections/languages.html %}
 
-      {% include_relative sections/quote.html
-        class="md:hidden"
-        content="Jesse is a passionate engineer who excels in acquiring new knowledge. His work is very well organized and he has a keen eye for detail, both from a technological perspective as in regard to customer requests."
-        author="Rob Habraken, CTO at We are you Agency"
-      %}
-
       {% include_relative sections/hobbies.html %}
 
     </div>
 
+    <!-- large content area for md+ display -->
+    <!-- (sections need to be removed from (hidden) the other container on md+)  -->
     <div class="hidden md:block md:w-7/12">
 
       {% include_relative sections/quote.html
@@ -59,14 +61,8 @@ permalink: /
         author="Theo Rosendorf, founder of Glyphic"
       %}
 
-      {% include_relative sections/competences.html %}
-
       {% include_relative sections/experience.html %}
 
-      {% include_relative sections/quote.html
-        content="Jesse is a passionate engineer who excels in acquiring new knowledge. His work is very well organized and he has a keen eye for detail, both from a technological perspective as in regard to customer requests."
-        author="Rob Habraken, CTO at We are you Agency"
-      %}
 
     </div>
 
