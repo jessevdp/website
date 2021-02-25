@@ -9,6 +9,10 @@
 
 /* Write your styles below this line. */
 
+body {
+  position: relative;
+}
+
 section {
   @apply my-8;
 }
@@ -21,6 +25,13 @@ section {
 
 h3 {
   @apply uppercase font-semibold text-sm tracking-widest mb-2;
+}
+
+#js-background-animation {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 
 /* Write your styles above this line. */
