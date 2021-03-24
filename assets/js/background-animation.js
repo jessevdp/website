@@ -1,5 +1,19 @@
 import Two from "./vendor/two.js"
 
+const SPEED = 0.005
+const CIRCLE_RADIUS = 200
+
+const COLORS = [
+  "#fea3aa",
+  "#f8b88b",
+  "#faf884",
+  "#baed91",
+  "#b2cefe",
+  "#f2a2e8",
+]
+
+//#region setup
+
 const wrapper = document.getElementById("js-background-animation")
 
 const settings = {
@@ -18,31 +32,87 @@ window.addEventListener("resize", () => {
   }
 })
 
-// ===============
-//  drawing
-// ===============
+//#endregion
 
-class Circle {
+//#region lib
 
-  constructor(two) {
-    this.x = 0
-    this.y = 0
+function random_color() {
+  let i = random_int_exclusive(0, COLORS.length)
+  return COLORS[i]
+}
 
-    this.two = two
-    this.shape = two.makeCircle(this.x, this.y, 200)
-    this.shape.scale = 0 
-    this.shape.fill = "coral"
+/**
+ * Helper class for storing coordinate pairs & converting between screen positions
+ * and a localized coordinate space (x axis centered on the page). Coords have to
+ * be stored in the "local" system because of page resizing.
+ * 
+ * (depends on global Two object)
+ */
+class Position {
+
+  constructor(x, y) {
+    this.x = x
+    this.y = y
+  }
+
+  static randomScreenPosition() {
+    let x_start = window.scrollX
+    let x_end = x_start + window.innerWidth
+
+    let y_start = window.scrollY
+    let y_end = y_start + window.innerHeight
+
+    let x = random_int_inclusive(x_start, x_end)
+    let y = random_int_inclusive(y_start, y_end)
+
+    return this.fromScreenPosition(x, y)
+  }
+
+  static fromScreenPosition(x, y) {
+    let local_x = x - (two.width / 2)
+    return new Position(local_x, y)
+  }
+
+  get screen_x() {
+    return (two.width / 2) + this.x
+  }
+
+  get screen_y() {
+    return this.y
+  }
+}
+
+/**
+ * (depends on global Two object)
+ */
+class AnimatedCircle {
+
+  constructor(position, color, radius = CIRCLE_RADIUS, animation_speed = SPEED) {
+    this.animation_speed = animation_speed
+    this.position = position
+
+    this.shape = two.makeCircle(position.screen_x, position.screen_y, radius)
+    this.shape.scale = 0
+    this.shape.fill = color
     this.shape.noStroke()
   }
 
-  animate() {
-    let speed = 0.0075
+  /**
+   * Create a new Animated circle at a random position with a random color
+   * @returns AnimatedCircle instance
+   */
+  static random() {
+    let position = Position.randomScreenPosition()
+    let color = random_color()
+    return new AnimatedCircle(position, color)
+  }
 
+  animate() {
     if (this.shape.scale < 1) {
-      this.shape.scale += 1 * speed
+      this.shape.scale += 1 * this.animation_speed
     }
     if (this.shape.opacity > 0) {
-      this.shape.opacity -= (3/4) * speed 
+      this.shape.opacity -= (3 / 4) * this.animation_speed
     }
   }
 
@@ -51,48 +121,51 @@ class Circle {
     this.shape.opacity = 1
   }
 
-  isDone() {
+  get is_done() {
     return this.shape.scale >= 1 && this.shape.opacity <= 0
   }
 
-  reposition() {
-    this.shape.translation.y = this.y
-    this.shape.translation.x = (this.two.width / 2) + this.x
+  updatePosition() {
+    this.shape.translation.x = this.position.screen_x
+    this.shape.translation.y = this.position.screen_y
+  }
+
+  destroy() {
+    two.remove(this.shape)
   }
 
 }
 
-var c = new Circle(two)
-c.x = -250
-c.y = 250
-c.reposition()
+//#endregion
 
-//var circle = two.makeCircle(two.width / 2, two.height / 2, 200)
-//circle.scale = 0 
-//circle.fill = "lightgreen"
-//circle.noStroke()
-//
+//#region animation
+
+let current = AnimatedCircle.random()
+
 two.bind("resize", () => {
-//  circle.translation.x = two.width / 2
-//  circle.translation.y = two.height / 2
-  c.reposition()
+  current.updatePosition()
 })
 
 two.bind("update", function () {
-//  if (circle.scale < 1) {
-//    circle.scale += 0.01
-//  }
-//  if (circle.opacity > 0) { 
-//    circle.opacity -= 0.0075
-//  } 
-//  if (circle.scale >= 1 && circle.opacity <= 0) {
-//    circle.scale = 0
-//    circle.opacity = 1
-//  }
-  if (c.isDone()) {
-    c.reset()
-    return
+  if (current.is_done) {
+    current.destroy()
+    current = AnimatedCircle.random()
+  } else {
+    current.animate()
   }
-  c.animate()
 })
+
+//#endregion
+
+//#region helpers
+
+function random_int_inclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function random_int_exclusive(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+//#endregion
 
