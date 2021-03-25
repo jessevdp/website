@@ -1,6 +1,7 @@
 import Two from "./vendor/two.js"
 
 const SPEED = 0.005
+const DELAY = 1500
 const CIRCLE_RADIUS = 200
 
 const COLORS = [
@@ -42,8 +43,8 @@ function random_color() {
 }
 
 /**
- * Helper class for storing coordinate pairs & converting between screen positions
- * and a localized coordinate space (x axis centered on the page). Coords have to
+ * Coordinate pair with helper methods for generating a random position and for converting between
+ * screen positions and a localized coordinate space (x axis centered on the page). Coords have to
  * be stored in the "local" system because of page resizing.
  * 
  * (depends on global Two object)
@@ -58,7 +59,6 @@ class Position {
   static randomScreenPosition() {
     let x_start = window.scrollX
     let x_end = x_start + window.innerWidth
-
     let y_start = window.scrollY
     let y_end = y_start + window.innerHeight
 
@@ -147,9 +147,12 @@ two.bind("resize", () => {
 })
 
 two.bind("update", function () {
+  if (current == null) return
+
   if (current.is_done) {
     current.destroy()
-    current = AnimatedCircle.random()
+    current = null
+    setTimeout(() => current = AnimatedCircle.random(), DELAY)
   } else {
     current.animate()
   }
