@@ -2,6 +2,7 @@ import Two from "./vendor/two.js"
 
 const SPEED = 0.005
 const DELAY = 1500
+const INITIAL_DELAY = 3000
 const CIRCLE_RADIUS = 200
 
 const COLORS = [
@@ -116,11 +117,6 @@ class AnimatedCircle {
     }
   }
 
-  reset() {
-    this.shape.scale = 0
-    this.shape.opacity = 1
-  }
-
   get is_done() {
     return this.shape.scale >= 1 && this.shape.opacity <= 0
   }
@@ -140,7 +136,8 @@ class AnimatedCircle {
 
 //#region animation
 
-let current = AnimatedCircle.random()
+let current = null
+setTimeout(() => current = AnimatedCircle.random(), INITIAL_DELAY)
 
 two.bind("resize", () => {
   current.updatePosition()
