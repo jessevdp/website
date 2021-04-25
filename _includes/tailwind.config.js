@@ -5,6 +5,9 @@ module.exports = {
       sans: ['"Montserrat"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"']
     },
     extend: {
+      spacing: {
+        '1.5': '0.375rem',
+      },
       colors: {
         gray: {
           '100': '#f5f5f5',
