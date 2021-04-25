@@ -1,5 +1,4 @@
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 markdown: kramdown
 plugins:
@@ -11,10 +10,13 @@ exclude:
   - Gemfile.lock
   - node_modules
   - yarn.lock
+  - package.json
   - package-lock.json
   - README.md
   - postcss.config.js
   - purgecss.config.js
+  - stylelint.config.js
   - netlify.toml
   - bin
   - .gitignore
+  - browserslist
