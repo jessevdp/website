@@ -6,12 +6,11 @@ const INITIAL_DELAY = 3000
 const CIRCLE_RADIUS = 200
 
 const COLORS = [
-  "#fea3aa",
-  "#f8b88b",
-  "#faf884",
-  "#baed91",
-  "#b2cefe",
-  "#f2a2e8",
+  "#fbc531", // yellow
+  "#9c88ff", // purple
+  "#00a8ff", // blue
+  "#e84118", // red
+  "#4cd137", // green
 ]
 
 //#region setup
