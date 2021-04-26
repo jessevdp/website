@@ -1,5 +1,3 @@
-import Two from "./vendor/two.js"
-
 const SPEED = 0.005
 const DELAY = 1500
 const INITIAL_DELAY = 3000
