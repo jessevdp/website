@@ -631,6 +631,11 @@ h3 {
   padding-right: 0.25rem;
 }
 
+.print-include-bg {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
 /* Write your styles above this line. */
 
 .space-y-0 > :not([hidden]) ~ :not([hidden]){
