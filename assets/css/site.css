@@ -623,17 +623,19 @@ h3 {
   z-index: -1;
 }
 
+.print-include-bg {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
 .term {
   --tw-bg-opacity: 1;
   background-color: rgba(189, 189, 189, var(--tw-bg-opacity));
   --tw-bg-opacity: 0.25;
   padding-left: 0.25rem;
   padding-right: 0.25rem;
-}
-
-.print-include-bg {
-  -webkit-print-color-adjust: exact !important;
-  print-color-adjust: exact !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 /* Write your styles above this line. */
