@@ -38,6 +38,11 @@ h3 {
   @apply bg-gray-400 bg-opacity-25 px-1;
 }
 
+.print-include-bg {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
 /* Write your styles above this line. */
 
 @tailwind utilities;
