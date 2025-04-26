@@ -8,6 +8,8 @@ plugins:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - flake.nix
+  - flake.lock
   - node_modules
   - yarn.lock
   - package.json
