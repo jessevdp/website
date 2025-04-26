@@ -19,6 +19,9 @@ module.exports = {
         }
       }
     },
+    listStyleType: {
+      square: 'square',
+    },
   },
   variants: {},
   plugins: [],
